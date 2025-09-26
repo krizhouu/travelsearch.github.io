@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Results - Wanderlust</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#57B5E7',secondary:'#8DD3C7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-gray-50">
+<nav class="sticky top-0 z-50 bg-white shadow-sm">
+<div class="w-full px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-8">
+<h1 class="text-2xl font-['Pacifico'] text-primary">Wanderlust</h1>
+<div class="hidden md:flex space-x-6">
+<a href="index.html" data-readdy="true" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Destinations</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Hotels</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Flights</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Tours</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Deals</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">My Bookings</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 text-sm text-gray-600">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-global-line"></i>
+</div>
+<span>EN / USD</span>
+</div>
+<button class="text-gray-700 hover:text-primary transition-colors whitespace-nowrap">Sign In</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Register</button>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="bg-white shadow-sm border-b border-gray-200">
+<div class="max-w-7xl mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6 text-sm text-gray-600">
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<span class="font-medium">Santorini, Greece</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-line text-primary"></i>
+</div>
+<span>Dec 15 - Dec 22, 2025</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-user-line text-primary"></i>
+</div>
+<span>2 Adults, 1 Room</span>
+</div>
+</div>
+<button class="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors whitespace-nowrap">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-edit-line"></i>
+</div>
+<span class="font-medium">Edit Search</span>
+</button>
+</div>
+</div>
+</div>
+
+<div class="max-w-7xl mx-auto px-6 py-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h1 class="text-2xl font-bold text-gray-900">Santorini Hotels</h1>
+<p class="text-gray-600">147 properties found</p>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2">
+<span class="text-sm text-gray-600">Sort by:</span>
+<div class="relative">
+<button id="sort-button" class="flex items-center space-x-2 bg-white border border-gray-300 px-4 py-2 rounded-lg hover:border-primary focus:ring-2 focus:ring-primary focus:border-transparent whitespace-nowrap">
+<span>Recommended</span>
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+</button>
+</div>
+</div>
+<button class="flex items-center space-x-2 bg-white border border-gray-300 px-4 py-2 rounded-lg hover:border-primary transition-colors whitespace-nowrap">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-map-line text-gray-600"></i>
+</div>
+<span>Map View</span>
+</button>
+</div>
+</div>
+
+<div class="flex gap-8">
+<div class="w-80 flex-shrink-0">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-24">
+<h3 class="text-lg font-semibold text-gray-900 mb-6">Filters</h3>
+
+<div class="space-y-6">
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Price Range</h4>
+<div class="space-y-3">
+<div class="relative">
+<input type="range" id="price-range" min="50" max="1000" value="500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+<style>
+#price-range::-webkit-slider-thumb {
+appearance: none;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: #57B5E7;
+cursor: pointer;
+}
+#price-range::-moz-range-thumb {
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: #57B5E7;
+cursor: pointer;
+border: none;
+}
+</style>
+</div>
+<div class="flex justify-between text-sm text-gray-600">
+<span>$50</span>
+<span id="price-value">$500</span>
+<span>$1000+</span>
+</div>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Star Rating</h4>
+<div class="space-y-2">
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only star-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">5 Stars</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only star-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">4 Stars</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only star-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">3 Stars</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Property Type</h4>
+<div class="space-y-2">
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only property-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Hotel</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only property-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Resort</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only property-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Villa</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only property-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Apartment</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Amenities</h4>
+<div class="space-y-2">
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only amenity-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Free WiFi</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only amenity-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Swimming Pool</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only amenity-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Spa</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only amenity-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Restaurant</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only amenity-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">Gym</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Guest Rating</h4>
+<div class="space-y-2">
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only rating-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">9.0+ Excellent</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only rating-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">8.0+ Very Good</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<div class="relative">
+<input type="checkbox" class="sr-only rating-checkbox">
+<div class="w-5 h-5 border-2 border-gray-300 rounded bg-white flex items-center justify-center checkbox-custom">
+<div class="w-3 h-3 flex items-center justify-center text-white opacity-0 checkmark">
+<i class="ri-check-line text-xs"></i>
+</div>
+</div>
+</div>
+<span class="text-gray-700">7.0+ Good</span>
+</label>
+</div>
+</div>
+</div>
+
+<div class="pt-6 border-t border-gray-200">
+<button class="w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Apply Filters</button>
+</div>
+</div>
+</div>
+
+<div class="flex-1">
+<div class="space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+<div class="flex">
+<div class="w-80 h-64 bg-cover bg-center relative" style="background-image: url('https://readdy.ai/api/search-image?query=Luxurious%20Santorini%20hotel%20with%20stunning%20infinity%20pool%20overlooking%20the%20crystal%20clear%20Aegean%20Sea%20and%20dramatic%20volcanic%20cliffs.%20Traditional%20white%20Cycladic%20architecture%20with%20blue%20accents%2C%20elegant%20terraces%2C%20and%20breathtaking%20sunset%20views.%20Premium%20Mediterranean%20resort%20with%20sophisticated%20design%20and%20romantic%20ambiance&width=400&height=300&seq=hotel1&orientation=landscape')">
+<button class="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+<div class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-red-500">
+<i class="ri-heart-line"></i>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 flex space-x-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="flex-1 p-6">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Grace Hotel Santorini</h3>
+<div class="flex items-center space-x-1 mb-2">
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+<span class="text-sm text-gray-600 ml-1">5 Star</span>
+</div>
+<p class="text-sm text-gray-600 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-map-pin-line"></i>
+</div>
+Imerovigli • 2.1 km from center
+</p>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end mb-1">
+<span class="bg-primary text-white px-2 py-1 rounded text-sm font-medium">9.2</span>
+<span class="text-sm text-gray-600 ml-2">Excellent</span>
+</div>
+<p class="text-xs text-gray-500">1,247 reviews</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-wifi-line"></i>
+</div>
+<span>Free WiFi</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-swimming-pool-line"></i>
+</div>
+<span>Pool</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-restaurant-line"></i>
+</div>
+<span>Restaurant</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-spa-line"></i>
+</div>
+<span>Spa</span>
+</div>
+</div>
+</div>
+<div class="text-sm text-gray-600 mb-4">Superior Double Room with Sea View</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500 mb-1">7 nights, 2 adults</p>
+<div class="flex items-center space-x-2">
+<span class="text-gray-400 line-through text-sm">$2,890</span>
+<span class="text-2xl font-bold text-gray-900">$2,456</span>
+</div>
+<p class="text-xs text-gray-500">Includes taxes and fees</p>
+</div>
+<div class="flex space-x-3">
+<button class="border border-primary text-primary px-4 py-2 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Details</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+<div class="flex">
+<div class="w-80 h-64 bg-cover bg-center relative" style="background-image: url('https://readdy.ai/api/search-image?query=Elegant%20Santorini%20boutique%20hotel%20with%20traditional%20cave%20suites%20carved%20into%20volcanic%20cliffs%20overlooking%20the%20caldera.%20Whitewashed%20walls%2C%20blue%20dome%20details%2C%20and%20private%20terraces%20with%20hot%20tubs.%20Authentic%20Greek%20island%20architecture%20with%20luxury%20amenities%20and%20panoramic%20ocean%20views&width=400&height=300&seq=hotel2&orientation=landscape')">
+<button class="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+<div class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-red-500">
+<i class="ri-heart-line"></i>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 flex space-x-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="flex-1 p-6">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Canaves Oia Suites</h3>
+<div class="flex items-center space-x-1 mb-2">
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+<span class="text-sm text-gray-600 ml-1">5 Star</span>
+</div>
+<p class="text-sm text-gray-600 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-map-pin-line"></i>
+</div>
+Oia • 1.8 km from center
+</p>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end mb-1">
+<span class="bg-primary text-white px-2 py-1 rounded text-sm font-medium">9.4</span>
+<span class="text-sm text-gray-600 ml-2">Excellent</span>
+</div>
+<p class="text-xs text-gray-500">892 reviews</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-wifi-line"></i>
+</div>
+<span>Free WiFi</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-swimming-pool-line"></i>
+</div>
+<span>Pool</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-restaurant-line"></i>
+</div>
+<span>Restaurant</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-car-line"></i>
+</div>
+<span>Parking</span>
+</div>
+</div>
+</div>
+<div class="text-sm text-gray-600 mb-4">Honeymoon Suite with Private Pool</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500 mb-1">7 nights, 2 adults</p>
+<div class="flex items-center space-x-2">
+<span class="text-2xl font-bold text-gray-900">$3,245</span>
+</div>
+<p class="text-xs text-gray-500">Includes taxes and fees</p>
+</div>
+<div class="flex space-x-3">
+<button class="border border-primary text-primary px-4 py-2 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Details</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+<div class="flex">
+<div class="w-80 h-64 bg-cover bg-center relative" style="background-image: url('https://readdy.ai/api/search-image?query=Charming%20Santorini%20cliffside%20hotel%20with%20traditional%20Greek%20architecture%20featuring%20white%20cubic%20buildings%20and%20blue%20shutters.%20Terraced%20levels%20built%20into%20the%20volcanic%20rock%20with%20stunning%20caldera%20views%2C%20infinity%20pools%2C%20and%20romantic%20dining%20areas.%20Authentic%20Cycladic%20design%20with%20modern%20luxury%20touches&width=400&height=300&seq=hotel3&orientation=landscape')">
+<button class="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+<div class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-red-500">
+<i class="ri-heart-line"></i>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 flex space-x-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="flex-1 p-6">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Mystique Luxury Resort</h3>
+<div class="flex items-center space-x-1 mb-2">
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+<span class="text-sm text-gray-600 ml-1">5 Star</span>
+</div>
+<p class="text-sm text-gray-600 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-map-pin-line"></i>
+</div>
+Oia • 0.5 km from center
+</p>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end mb-1">
+<span class="bg-primary text-white px-2 py-1 rounded text-sm font-medium">9.1</span>
+<span class="text-sm text-gray-600 ml-2">Excellent</span>
+</div>
+<p class="text-xs text-gray-500">634 reviews</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-wifi-line"></i>
+</div>
+<span>Free WiFi</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-swimming-pool-line"></i>
+</div>
+<span>Pool</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-spa-line"></i>
+</div>
+<span>Spa</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-goblet-line"></i>
+</div>
+<span>Bar</span>
+</div>
+</div>
+</div>
+<div class="text-sm text-gray-600 mb-4">Deluxe Cave Suite with Caldera View</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500 mb-1">7 nights, 2 adults</p>
+<div class="flex items-center space-x-2">
+<span class="text-gray-400 line-through text-sm">$2,650</span>
+<span class="text-2xl font-bold text-gray-900">$2,385</span>
+</div>
+<p class="text-xs text-gray-500">Includes taxes and fees</p>
+</div>
+<div class="flex space-x-3">
+<button class="border border-primary text-primary px-4 py-2 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Details</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+<div class="flex">
+<div class="w-80 h-64 bg-cover bg-center relative" style="background-image: url('https://readdy.ai/api/search-image?query=Beautiful%20Santorini%20hotel%20with%20panoramic%20views%20of%20the%20Aegean%20Sea%20and%20traditional%20windmills%20in%20the%20distance.%20Elegant%20white%20architecture%20with%20stone%20accents%2C%20outdoor%20dining%20terraces%2C%20and%20infinity%20pools%20that%20seem%20to%20merge%20with%20the%20horizon.%20Luxury%20Mediterranean%20resort%20with%20sophisticated%20amenities&width=400&height=300&seq=hotel4&orientation=landscape')">
+<button class="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+<div class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-red-500">
+<i class="ri-heart-line"></i>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 flex space-x-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="flex-1 p-6">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Andronis Luxury Suites</h3>
+<div class="flex items-center space-x-1 mb-2">
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-line"></i></div>
+</div>
+<span class="text-sm text-gray-600 ml-1">4 Star</span>
+</div>
+<p class="text-sm text-gray-600 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-map-pin-line"></i>
+</div>
+Oia • 1.2 km from center
+</p>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end mb-1">
+<span class="bg-primary text-white px-2 py-1 rounded text-sm font-medium">8.9</span>
+<span class="text-sm text-gray-600 ml-2">Excellent</span>
+</div>
+<p class="text-xs text-gray-500">456 reviews</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-wifi-line"></i>
+</div>
+<span>Free WiFi</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-swimming-pool-line"></i>
+</div>
+<span>Pool</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-restaurant-line"></i>
+</div>
+<span>Restaurant</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-car-line"></i>
+</div>
+<span>Parking</span>
+</div>
+</div>
+</div>
+<div class="text-sm text-gray-600 mb-4">Junior Suite with Sea View</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500 mb-1">7 nights, 2 adults</p>
+<div class="flex items-center space-x-2">
+<span class="text-2xl font-bold text-gray-900">$1,890</span>
+</div>
+<p class="text-xs text-gray-500">Includes taxes and fees</p>
+</div>
+<div class="flex space-x-3">
+<button class="border border-primary text-primary px-4 py-2 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Details</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+<div class="flex">
+<div class="w-80 h-64 bg-cover bg-center relative" style="background-image: url('https://readdy.ai/api/search-image?query=Cozy%20Santorini%20boutique%20hotel%20with%20intimate%20courtyard%20gardens%20filled%20with%20bougainvillea%20and%20traditional%20Greek%20pottery.%20Charming%20white%20stone%20buildings%20with%20arched%20doorways%2C%20wooden%20shutters%2C%20and%20private%20balconies%20overlooking%20the%20village.%20Authentic%20island%20hospitality%20with%20rustic%20elegance%20and%20peaceful%20atmosphere&width=400&height=300&seq=hotel5&orientation=landscape')">
+<button class="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+<div class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-red-500">
+<i class="ri-heart-line"></i>
+</div>
+</button>
+<div class="absolute bottom-4 left-4 flex space-x-1">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+<div class="w-2 h-2 bg-white bg-opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="flex-1 p-6">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Perivolas Traditional Houses</h3>
+<div class="flex items-center space-x-1 mb-2">
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-line"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-line"></i></div>
+</div>
+<span class="text-sm text-gray-600 ml-1">3 Star</span>
+</div>
+<p class="text-sm text-gray-600 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-map-pin-line"></i>
+</div>
+Fira • 0.8 km from center
+</p>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end mb-1">
+<span class="bg-primary text-white px-2 py-1 rounded text-sm font-medium">8.3</span>
+<span class="text-sm text-gray-600 ml-2">Very Good</span>
+</div>
+<p class="text-xs text-gray-500">289 reviews</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-wifi-line"></i>
+</div>
+<span>Free WiFi</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-cup-line"></i>
+</div>
+<span>Breakfast</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-car-line"></i>
+</div>
+<span>Parking</span>
+</div>
+<div class="flex items-center space-x-1">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-air-conditioner-line"></i>
+</div>
+<span>AC</span>
+</div>
+</div>
+</div>
+<div class="text-sm text-gray-600 mb-4">Traditional Double Room with Patio</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500 mb-1">7 nights, 2 adults</p>
+<div class="flex items-center space-x-2">
+<span class="text-gray-400 line-through text-sm">$1,120</span>
+<span class="text-2xl font-bold text-gray-900">$896</span>
+</div>
+<p class="text-xs text-gray-500">Includes taxes and fees</p>
+</div>
+<div class="flex space-x-3">
+<button class="border border-primary text-primary px-4 py-2 !rounded-button hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Details</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="flex justify-center items-center space-x-2 mt-8">
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors whitespace-nowrap">Previous</button>
+<button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors">2</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors">3</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors">4</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors">5</button>
+<button class="px-3 py-2 border border-gray-300 rounded-lg hover:border-primary transition-colors whitespace-nowrap">Next</button>
+</div>
+</div>
+</div>
+</div>
+
+<footer class="bg-gray-900 text-white py-12 mt-16">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<h3 class="text-2xl font-['Pacifico'] text-primary mb-4">Wanderlust</h3>
+<p class="text-gray-300 mb-4">Your trusted partner for unforgettable travel experiences around the world.</p>
+<div class="flex space-x-4">
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-facebook-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-twitter-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-instagram-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-youtube-fill"></i>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Company</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Support</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Booking Support</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Travel Insurance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Popular Destinations</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Paris, France</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Tokyo, Japan</a></li>
+<li><a href="#" class="hover:text-white transition-colors">New York, USA</a></li>
+<li><a href="#" class="hover:text-white transition-colors">London, UK</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm">© 2025 Wanderlust. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+</div>
+<div class="flex items-center space-x-4 mt-4 md:mt-0">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-visa-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-mastercard-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill text-2xl text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script id="filter-interactions">
+document.addEventListener('DOMContentLoaded', function() {
+const priceRange = document.getElementById('price-range');
+const priceValue = document.getElementById('price-value');
+
+if (priceRange && priceValue) {
+priceRange.addEventListener('input', function() {
+priceValue.textContent = `$${this.value}`;
+});
+}
+
+const checkboxes = document.querySelectorAll('.checkbox-custom');
+checkboxes.forEach(checkbox => {
+const input = checkbox.parentElement.querySelector('input[type="checkbox"]');
+const checkmark = checkbox.querySelector('.checkmark');
+
+checkbox.addEventListener('click', function() {
+input.checked = !input.checked;
+if (input.checked) {
+checkbox.style.backgroundColor = '#57B5E7';
+checkbox.style.borderColor = '#57B5E7';
+checkmark.style.opacity = '1';
+} else {
+checkbox.style.backgroundColor = 'white';
+checkbox.style.borderColor = '#d1d5db';
+checkmark.style.opacity = '0';
+}
+});
+});
+});
+</script>
+
+<script id="heart-favorites">
+document.addEventListener('DOMContentLoaded', function() {
+const heartButtons = document.querySelectorAll('button[class*="absolute"][class*="top-4"][class*="right-4"]');
+heartButtons.forEach(button => {
+const heartIcon = button.querySelector('i');
+button.addEventListener('click', function() {
+if (heartIcon.classList.contains('ri-heart-line')) {
+heartIcon.classList.remove('ri-heart-line');
+heartIcon.classList.add('ri-heart-fill');
+heartIcon.parentElement.classList.add('text-red-500');
+heartIcon.parentElement.classList.remove('text-gray-600');
+} else {
+heartIcon.classList.remove('ri-heart-fill');
+heartIcon.classList.add('ri-heart-line');
+heartIcon.parentElement.classList.remove('text-red-500');
+heartIcon.parentElement.classList.add('text-gray-600');
+}
+});
+});
+});
+</script>
+
+<script id="booking-interactions">
+document.addEventListener('DOMContentLoaded', function() {
+const bookNowButtons = document.querySelectorAll('button[class*="bg-primary"][class*="text-white"]:not([class*="Apply"])');
+bookNowButtons.forEach(button => {
+button.addEventListener('click', function() {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Booking process initiated! Redirecting...';
+document.body.appendChild(notification);
+setTimeout(() => {
+notification.remove();
+}, 3000);
+});
+});
+
+const viewDetailsButtons = document.querySelectorAll('button[class*="border-primary"][class*="text-primary"]');
+viewDetailsButtons.forEach(button => {
+button.addEventListener('click', function() {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Loading property details...';
+document.body.appendChild(notification);
+setTimeout(() => {
+notification.remove();
+}, 2000);
+});
+});
+});
+</script>
+
+</body>
+</html>

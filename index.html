@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelSearch - Discover Your Next Adventure</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#57B5E7',secondary:'#8DD3C7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-white">
+<nav class="sticky top-0 z-50 bg-white shadow-sm">
+<div class="w-full px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-8">
+<h1 class="text-2xl font-['Pacifico'] text-primary">TravelSearch</h1>
+<div class="hidden md:flex space-x-6">
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Destinations</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Hotels</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Flights</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Tours</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Deals</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">My Bookings</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 text-sm text-gray-600">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-global-line"></i>
+</div>
+<span>EN / USD</span>
+</div>
+<button class="text-gray-700 hover:text-primary transition-colors whitespace-nowrap">Sign In</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Register</button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative min-h-screen flex items-center justify-center" style="background-image: url('https://readdy.ai/api/search-image?query=Breathtaking%20tropical%20paradise%20with%20crystal%20clear%20turquoise%20waters%2C%20pristine%20white%20sandy%20beaches%2C%20swaying%20palm%20trees%2C%20and%20dramatic%20mountain%20peaks%20in%20the%20background.%20The%20left%20side%20features%20a%20soft%20gradient%20overlay%20transitioning%20from%20pure%20white%20to%20transparent%2C%20creating%20perfect%20contrast%20for%20text%20overlay.%20Golden%20hour%20lighting%20with%20warm%2C%20inviting%20atmosphere.%20Ultra-realistic%20photography%20style%20with%20vibrant%20colors%20and%20stunning%20natural%20beauty%20that%20inspires%20wanderlust%20and%20adventure&width=1920&height=1080&seq=hero_travel_bg&orientation=landscape'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6">
+<div class="max-w-2xl">
+<h1 class="text-5xl font-bold text-gray-900 mb-6">Discover Your Next Adventure</h1>
+<p class="text-xl text-gray-700 mb-8">Explore breathtaking destinations, book amazing hotels, and create unforgettable memories with our comprehensive travel platform</p>
+<div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+<div class="relative">
+<label class="block text-sm font-medium text-gray-700 mb-2">Destination</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+<i class="ri-map-pin-line text-gray-400"></i>
+</div>
+<input type="text" placeholder="Where to?" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Check-in</label>
+<input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Check-out</label>
+<input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Guests</label>
+<div class="relative">
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400" id="guests-arrow"></i>
+</div>
+<button id="guests-button" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:ring-2 focus:ring-primary focus:border-transparent">2 Adults</button>
+<div id="guests-dropdown" class="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg z-10 mt-1 hidden">
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-medium text-gray-900">Adults</div>
+<div class="text-sm text-gray-500">Ages 13+</div>
+</div>
+<div class="flex items-center space-x-3">
+<button id="adults-minus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-subtract-line text-gray-600"></i>
+</button>
+<span id="adults-count" class="w-8 text-center font-medium">2</span>
+<button id="adults-plus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-add-line text-gray-600"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-medium text-gray-900">Children</div>
+<div class="text-sm text-gray-500">Ages 2-12</div>
+</div>
+<div class="flex items-center space-x-3">
+<button id="children-minus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-subtract-line text-gray-600"></i>
+</button>
+<span id="children-count" class="w-8 text-center font-medium">0</span>
+<button id="children-plus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-add-line text-gray-600"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-medium text-gray-900">Infants</div>
+<div class="text-sm text-gray-500">Under 2</div>
+</div>
+<div class="flex items-center space-x-3">
+<button id="infants-minus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-subtract-line text-gray-600"></i>
+</button>
+<span id="infants-count" class="w-8 text-center font-medium">0</span>
+<button id="infants-plus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-add-line text-gray-600"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-medium text-gray-900">Rooms</div>
+<div class="text-sm text-gray-500">Number of rooms</div>
+</div>
+<div class="flex items-center space-x-3">
+<button id="rooms-minus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-subtract-line text-gray-600"></i>
+</button>
+<span id="rooms-count" class="w-8 text-center font-medium">1</span>
+<button id="rooms-plus" class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50">
+<i class="ri-add-line text-gray-600"></i>
+</button>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-200">
+<button id="guests-done" class="w-full bg-primary text-white py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Done</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<a href="searchadventures.html" data-readdy="true" class="block w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap text-center">Search Adventures</a>
+</div>
+<div class="flex flex-wrap gap-4">
+<a href="flight.html" data-readdy="true" class="flex items-center space-x-2 bg-white text-gray-700 px-6 py-3 !rounded-button shadow-md hover:shadow-lg transition-shadow whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-plane-line"></i>
+</div>
+<span>Search Flights</span>
+</a>
+<button class="flex items-center space-x-2 bg-white text-gray-700 px-6 py-3 !rounded-button shadow-md hover:shadow-lg transition-shadow whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-hotel-line"></i>
+</div>
+<span>Find Hotels</span>
+</button>
+<button class="flex items-center space-x-2 bg-white text-gray-700 px-6 py-3 !rounded-button shadow-md hover:shadow-lg transition-shadow whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-map-2-line"></i>
+</div>
+<span>Book Tours</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
+<p class="text-gray-600">Discover the world's most amazing places</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Stunning%20aerial%20view%20of%20Santorini%20Greece%20with%20iconic%20white%20buildings%20and%20blue%20domed%20churches%20overlooking%20the%20crystal%20clear%20Aegean%20Sea.%20Dramatic%20cliffs%2C%20traditional%20Cycladic%20architecture%2C%20and%20breathtaking%20sunset%20colors%20painting%20the%20sky.%20Mediterranean%20paradise%20with%20pristine%20beaches%20and%20charming%20villages.%20Professional%20travel%20photography%20with%20vibrant%20blues%20and%20whites&width=400&height=300&seq=santorini_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Santorini, Greece</h3>
+<p class="text-gray-600 text-sm mb-4">Iconic white buildings and stunning sunsets</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $299</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.8</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Magnificent%20Bali%20Indonesia%20rice%20terraces%20with%20emerald%20green%20stepped%20fields%20cascading%20down%20hillsides.%20Traditional%20Balinese%20temples%20and%20tropical%20palm%20trees%20scattered%20throughout%20the%20landscape.%20Misty%20mountains%20in%20the%20background%20with%20golden%20sunrise%20light.%20Peaceful%20and%20serene%20Asian%20paradise%20with%20lush%20vegetation%20and%20cultural%20heritage&width=400&height=300&seq=bali_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Bali, Indonesia</h3>
+<p class="text-gray-600 text-sm mb-4">Tropical paradise with rich culture</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $199</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.9</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Breathtaking%20Swiss%20Alps%20landscape%20with%20snow-capped%20mountain%20peaks%2C%20pristine%20alpine%20lakes%20reflecting%20the%20mountains%2C%20and%20charming%20wooden%20chalets%20nestled%20in%20green%20valleys.%20Crystal%20clear%20blue%20skies%2C%20wildflower%20meadows%2C%20and%20dramatic%20rocky%20formations.%20European%20mountain%20paradise%20with%20hiking%20trails%20and%20scenic%20beauty&width=400&height=300&seq=swiss_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Swiss Alps</h3>
+<p class="text-gray-600 text-sm mb-4">Majestic mountains and pristine nature</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $499</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.7</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Iconic%20Machu%20Picchu%20ancient%20ruins%20perched%20high%20in%20the%20Andes%20mountains%20of%20Peru.%20Mysterious%20stone%20structures%20surrounded%20by%20dramatic%20mountain%20peaks%20and%20lush%20green%20terraces.%20Morning%20mist%20and%20golden%20sunlight%20illuminating%20the%20archaeological%20wonder.%20South%20American%20adventure%20destination%20with%20rich%20Incan%20history%20and%20breathtaking%20views&width=400&height=300&seq=machu_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Machu Picchu, Peru</h3>
+<p class="text-gray-600 text-sm mb-4">Ancient wonder in the clouds</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $399</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.9</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Spectacular%20Tokyo%20Japan%20cityscape%20at%20night%20with%20neon%20lights%2C%20futuristic%20skyscrapers%2C%20and%20traditional%20temples%20blending%20modern%20and%20ancient%20architecture.%20Bustling%20streets%20with%20cherry%20blossom%20trees%2C%20colorful%20signs%2C%20and%20Mount%20Fuji%20visible%20in%20the%20distance.%20Vibrant%20urban%20paradise%20showcasing%20Japanese%20culture%20and%20technology&width=400&height=300&seq=tokyo_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Tokyo, Japan</h3>
+<p class="text-gray-600 text-sm mb-4">Where tradition meets innovation</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $349</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.8</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Stunning%20Maldives%20overwater%20bungalows%20with%20crystal%20clear%20turquoise%20lagoons%2C%20pristine%20white%20sand%20beaches%2C%20and%20swaying%20palm%20trees.%20Luxury%20resort%20villas%20on%20stilts%20over%20the%20ocean%20with%20coral%20reefs%20visible%20beneath%20the%20transparent%20water.%20Tropical%20paradise%20with%20endless%20blue%20skies%20and%20romantic%20sunset%20views&width=400&height=300&seq=maldives_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Maldives</h3>
+<p class="text-gray-600 text-sm mb-4">Luxury overwater paradise</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $799</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.9</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Majestic%20African%20safari%20landscape%20with%20diverse%20wildlife%20including%20elephants%2C%20lions%2C%20and%20giraffes%20roaming%20across%20golden%20savanna%20grasslands.%20Acacia%20trees%20silhouetted%20against%20dramatic%20sunset%20skies%20with%20Mount%20Kilimanjaro%20in%20the%20background.%20Adventure%20destination%20showcasing%20natural%20beauty%20and%20wildlife%20conservation&width=400&height=300&seq=safari_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Kenya Safari</h3>
+<p class="text-gray-600 text-sm mb-4">Wildlife adventure of a lifetime</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $599</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.8</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Dramatic%20Iceland%20landscape%20with%20powerful%20waterfalls%20cascading%20down%20volcanic%20cliffs%2C%20geothermal%20hot%20springs%20with%20steam%20rising%2C%20and%20the%20Northern%20Lights%20aurora%20borealis%20dancing%20across%20star-filled%20skies.%20Rugged%20terrain%20with%20black%20sand%20beaches%2C%20glaciers%2C%20and%20moss-covered%20lava%20fields%20creating%20otherworldly%20scenery&width=400&height=300&seq=iceland_dest&orientation=landscape')"></div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Iceland</h3>
+<p class="text-gray-600 text-sm mb-4">Land of fire, ice, and Northern Lights</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-semibold">From $449</span>
+<div class="flex items-center text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-gray-600 text-sm ml-1">4.7</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Deals</h2>
+<p class="text-gray-600">Limited time offers you don't want to miss</p>
+</div>
+<div class="overflow-x-auto">
+<div class="flex space-x-6 pb-4" style="width: max-content;">
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" style="width: 320px;">
+<div class="relative">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Luxurious%20Paris%20France%20hotel%20room%20with%20elegant%20French%20decor%2C%20ornate%20furniture%2C%20and%20stunning%20views%20of%20the%20Eiffel%20Tower%20through%20large%20windows.%20Classic%20European%20architecture%20with%20romantic%20atmosphere%2C%20golden%20lighting%2C%20and%20sophisticated%20interior%20design.%20Premium%20accommodation%20showcasing%20Parisian%20charm%20and%20elegance&width=400&height=300&seq=paris_deal&orientation=landscape')"></div>
+<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">40% OFF</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Paris Luxury Hotel</h3>
+<p class="text-gray-600 text-sm mb-4">5-star accommodation near Eiffel Tower</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-gray-400 line-through text-sm">$599</span>
+<span class="text-primary font-bold text-xl ml-2">$359</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors text-sm whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" style="width: 320px;">
+<div class="relative">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Exciting%20Dubai%20UAE%20desert%20safari%20adventure%20with%20luxury%204x4%20vehicles%20racing%20across%20golden%20sand%20dunes%20under%20brilliant%20blue%20skies.%20Traditional%20Bedouin%20camps%20with%20colorful%20tents%2C%20camel%20rides%2C%20and%20spectacular%20sunset%20views%20over%20the%20Arabian%20desert.%20Adventure%20tourism%20showcasing%20Middle%20Eastern%20culture%20and%20hospitality&width=400&height=300&seq=dubai_deal&orientation=landscape')"></div>
+<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">30% OFF</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Dubai Desert Safari</h3>
+<p class="text-gray-600 text-sm mb-4">Adventure tour with dinner included</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-gray-400 line-through text-sm">$199</span>
+<span class="text-primary font-bold text-xl ml-2">$139</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors text-sm whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" style="width: 320px;">
+<div class="relative">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Magnificent%20Caribbean%20cruise%20ship%20sailing%20through%20crystal%20clear%20turquoise%20waters%20with%20tropical%20islands%20in%20the%20background.%20Luxury%20vessel%20with%20multiple%20decks%2C%20swimming%20pools%2C%20and%20elegant%20amenities.%20Paradise%20setting%20with%20palm-fringed%20beaches%2C%20coral%20reefs%2C%20and%20endless%20blue%20ocean%20horizons%20under%20sunny%20skies&width=400&height=300&seq=cruise_deal&orientation=landscape')"></div>
+<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">50% OFF</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Caribbean Cruise</h3>
+<p class="text-gray-600 text-sm mb-4">7-day all-inclusive luxury cruise</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-gray-400 line-through text-sm">$1,299</span>
+<span class="text-primary font-bold text-xl ml-2">$649</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors text-sm whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer" style="width: 320px;">
+<div class="relative">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Stunning%20New%20York%20City%20skyline%20at%20twilight%20with%20iconic%20skyscrapers%20illuminated%20against%20purple%20and%20orange%20sunset%20sky.%20Manhattan%20landmarks%20including%20Empire%20State%20Building%20and%20One%20World%20Trade%20Center%20creating%20dramatic%20urban%20silhouette.%20Metropolitan%20paradise%20showcasing%20American%20architecture%20and%20city%20lights%20reflecting%20on%20water&width=400&height=300&seq=nyc_deal&orientation=landscape')"></div>
+<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">35% OFF</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">New York City Break</h3>
+<p class="text-gray-600 text-sm mb-4">4 nights in Times Square hotel</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-gray-400 line-through text-sm">$899</span>
+<span class="text-primary font-bold text-xl ml-2">$584</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors text-sm whitespace-nowrap">Book Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
+<p class="text-gray-600">Everything you need for your perfect trip</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+<div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-hotel-line ri-2x"></i>
+</div>
+</div>
+<h3 class="text-2xl font-semibold text-gray-900 mb-4">Hotels</h3>
+<p class="text-gray-600 mb-6">Find the perfect accommodation from luxury resorts to budget-friendly options. Over 2 million properties worldwide with best price guarantee.</p>
+<button class="text-primary font-semibold hover:underline whitespace-nowrap">Browse Hotels</button>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+<div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-plane-line ri-2x"></i>
+</div>
+</div>
+<h3 class="text-2xl font-semibold text-gray-900 mb-4">Flights</h3>
+<p class="text-gray-600 mb-6">Compare and book flights from hundreds of airlines. Find the best deals on domestic and international flights with flexible booking options.</p>
+<button class="text-primary font-semibold hover:underline whitespace-nowrap">Search Flights</button>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+<div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-map-2-line ri-2x"></i>
+</div>
+</div>
+<h3 class="text-2xl font-semibold text-gray-900 mb-4">Tours</h3>
+<p class="text-gray-600 mb-6">Discover amazing experiences and guided tours. From cultural excursions to adventure activities, create memories that last a lifetime.</p>
+<button class="text-primary font-semibold hover:underline whitespace-nowrap">Explore Tours</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Travelers Say</h2>
+<p class="text-gray-600">Real experiences from real travelers</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-cover bg-center rounded-full mr-4" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20confident%20young%20woman%20with%20warm%20smile%2C%20shoulder-length%20brown%20hair%2C%20wearing%20business%20casual%20attire%20against%20clean%20white%20background.%20Friendly%20and%20approachable%20expression%20with%20natural%20lighting.%20High-quality%20professional%20photography%20style&width=100&height=100&seq=reviewer1&orientation=squarish')"></div>
+<div>
+<h4 class="font-semibold text-gray-900">John Doe</h4>
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+</div>
+</div>
+<p class="text-gray-600">"Absolutely incredible experience! The booking process was seamless and the customer service was outstanding. Our trip to Santorini exceeded all expectations. Highly recommend Wanderlust for anyone planning their next adventure."</p>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-cover bg-center rounded-full mr-4" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20handsome%20middle-aged%20man%20with%20short%20dark%20hair%2C%20wearing%20a%20navy%20blue%20shirt%20and%20genuine%20smile%20against%20clean%20white%20background.%20Confident%20and%20trustworthy%20appearance%20with%20professional%20lighting.%20High-quality%20business%20portrait%20photography&width=100&height=100&seq=reviewer2&orientation=squarish')"></div>
+<div>
+<h4 class="font-semibold text-gray-900">John Doe</h4>
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+</div>
+</div>
+<p class="text-gray-600">"Best travel platform I've ever used! Found amazing deals on flights and hotels for our family vacation to Japan. The website is user-friendly and the mobile app makes it easy to manage bookings on the go."</p>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-cover bg-center rounded-full mr-4" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20an%20elegant%20woman%20with%20blonde%20hair%20in%20a%20stylish%20bob%20cut%2C%20wearing%20a%20white%20blazer%20and%20pearl%20earrings%20against%20clean%20white%20background.%20Sophisticated%20and%20professional%20appearance%20with%20warm%20smile.%20High-quality%20corporate%20portrait%20photography&width=100&height=100&seq=reviewer3&orientation=squarish')"></div>
+<div>
+<h4 class="font-semibold text-gray-900">John Doe</h4>
+<div class="flex text-yellow-400">
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+<div class="w-4 h-4 flex items-center justify-center"><i class="ri-star-fill"></i></div>
+</div>
+</div>
+</div>
+<p class="text-gray-600">"The guided tours were phenomenal! Our safari in Kenya was a once-in-a-lifetime experience. The local guides were knowledgeable and the accommodations were top-notch. Can't wait to book our next adventure!"</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-primary bg-opacity-10">
+<div class="max-w-4xl mx-auto px-6 text-center">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Stay Updated with Travel Deals</h2>
+<p class="text-gray-600 mb-8">Subscribe to our newsletter and never miss exclusive offers, travel tips, and destination guides</p>
+<div class="flex flex-col sm:flex-row max-w-md mx-auto gap-4">
+<input type="email" placeholder="Enter your email address" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+<button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Subscribe</button>
+</div>
+<p class="text-xs text-gray-500 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+</div>
+</section>
+<footer class="bg-gray-900 text-white py-12">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<h3 class="text-2xl font-['Pacifico'] text-primary mb-4">TravelSearch</h3>
+<p class="text-gray-300 mb-4">Your trusted partner for unforgettable travel experiences around the world.</p>
+<div class="flex space-x-4">
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-facebook-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-twitter-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-instagram-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-youtube-fill"></i>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Company</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Support</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Booking Support</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Travel Insurance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Popular Destinations</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Paris, France</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Tokyo, Japan</a></li>
+<li><a href="#" class="hover:text-white transition-colors">New York, USA</a></li>
+<li><a href="#" class="hover:text-white transition-colors">London, UK</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm">© 2025 TravelSearch. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+</div>
+<div class="flex items-center space-x-4 mt-4 md:mt-0">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-visa-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-mastercard-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill text-2xl text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script id="search-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const searchButton = document.querySelector('button[class*="bg-primary"][class*="text-white"]');
+const destinationInput = document.querySelector('input[placeholder="Where to?"]');
+const checkinInput = document.querySelector('input[type="date"]:first-of-type');
+const checkoutInput = document.querySelector('input[type="date"]:last-of-type');
+if (searchButton) {
+searchButton.addEventListener('click', function() {
+console.log('Search initiated');
+});
+}
+});
+</script>
+<script id="newsletter-subscription">
+document.addEventListener('DOMContentLoaded', function() {
+const subscribeButton = document.querySelector('section[class*="bg-primary"] button[class*="bg-primary"]');
+const emailInput = document.querySelector('input[type="email"]');
+if (subscribeButton && emailInput) {
+subscribeButton.addEventListener('click', function() {
+const email = emailInput.value.trim();
+if (email && email.includes('@')) {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Thank you for subscribing to our newsletter!';
+document.body.appendChild(notification);
+emailInput.value = '';
+setTimeout(() => {
+notification.remove();
+}, 3000);
+} else {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Please enter a valid email address.';
+document.body.appendChild(notification);
+setTimeout(() => {
+notification.remove();
+}, 3000);
+}
+});
+}
+});
+</script>
+<script id="deal-interactions">
+document.addEventListener('DOMContentLoaded', function() {
+const bookNowButtons = document.querySelectorAll('button[class*="bg-primary"][class*="text-white"][class*="text-sm"]');
+bookNowButtons.forEach(button => {
+button.addEventListener('click', function() {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Booking process initiated! Redirecting to booking page...';
+document.body.appendChild(notification);
+setTimeout(() => {
+notification.remove();
+}, 3000);
+});
+});
+});
+</script>
+<script id="guests-dropdown-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const guestsButton = document.getElementById('guests-button');
+const guestsDropdown = document.getElementById('guests-dropdown');
+const guestsArrow = document.getElementById('guests-arrow');
+const doneButton = document.getElementById('guests-done');
+let adultsCount = 2;
+let childrenCount = 0;
+let infantsCount = 0;
+let roomsCount = 1;
+const adultsCountEl = document.getElementById('adults-count');
+const childrenCountEl = document.getElementById('children-count');
+const infantsCountEl = document.getElementById('infants-count');
+const roomsCountEl = document.getElementById('rooms-count');
+const adultsPlusBtn = document.getElementById('adults-plus');
+const adultsMinusBtn = document.getElementById('adults-minus');
+const childrenPlusBtn = document.getElementById('children-plus');
+const childrenMinusBtn = document.getElementById('children-minus');
+const infantsPlusBtn = document.getElementById('infants-plus');
+const infantsMinusBtn = document.getElementById('infants-minus');
+const roomsPlusBtn = document.getElementById('rooms-plus');
+const roomsMinusBtn = document.getElementById('rooms-minus');
+function updateGuestsButton() {
+let text = '';
+if (adultsCount > 0) {
+text += `${adultsCount} Adult${adultsCount > 1 ? 's' : ''}`;
+}
+if (childrenCount > 0) {
+text += text ? `, ${childrenCount} Child${childrenCount > 1 ? 'ren' : ''}` : `${childrenCount} Child${childrenCount > 1 ? 'ren' : ''}`;
+}
+if (infantsCount > 0) {
+text += text ? `, ${infantsCount} Infant${infantsCount > 1 ? 's' : ''}` : `${infantsCount} Infant${infantsCount > 1 ? 's' : ''}`;
+}
+if (roomsCount > 1) {
+text += text ? `, ${roomsCount} Rooms` : `${roomsCount} Rooms`;
+}
+guestsButton.textContent = text || '0 Guests';
+}
+function toggleDropdown() {
+const isHidden = guestsDropdown.classList.contains('hidden');
+if (isHidden) {
+guestsDropdown.classList.remove('hidden');
+guestsArrow.classList.add('rotate-180');
+} else {
+guestsDropdown.classList.add('hidden');
+guestsArrow.classList.remove('rotate-180');
+}
+}
+guestsButton.addEventListener('click', function(e) {
+e.stopPropagation();
+toggleDropdown();
+});
+doneButton.addEventListener('click', function() {
+guestsDropdown.classList.add('hidden');
+guestsArrow.classList.remove('rotate-180');
+});
+document.addEventListener('click', function(e) {
+if (!guestsButton.contains(e.target) && !guestsDropdown.contains(e.target)) {
+guestsDropdown.classList.add('hidden');
+guestsArrow.classList.remove('rotate-180');
+}
+});
+adultsPlusBtn.addEventListener('click', function() {
+adultsCount++;
+adultsCountEl.textContent = adultsCount;
+updateGuestsButton();
+});
+adultsMinusBtn.addEventListener('click', function() {
+if (adultsCount > 1) {
+adultsCount--;
+adultsCountEl.textContent = adultsCount;
+updateGuestsButton();
+}
+});
+childrenPlusBtn.addEventListener('click', function() {
+childrenCount++;
+childrenCountEl.textContent = childrenCount;
+updateGuestsButton();
+});
+childrenMinusBtn.addEventListener('click', function() {
+if (childrenCount > 0) {
+childrenCount--;
+childrenCountEl.textContent = childrenCount;
+updateGuestsButton();
+}
+});
+infantsPlusBtn.addEventListener('click', function() {
+infantsCount++;
+infantsCountEl.textContent = infantsCount;
+updateGuestsButton();
+});
+infantsMinusBtn.addEventListener('click', function() {
+if (infantsCount > 0) {
+infantsCount--;
+infantsCountEl.textContent = infantsCount;
+updateGuestsButton();
+}
+});
+roomsPlusBtn.addEventListener('click', function() {
+roomsCount++;
+roomsCountEl.textContent = roomsCount;
+updateGuestsButton();
+});
+roomsMinusBtn.addEventListener('click', function() {
+if (roomsCount > 1) {
+roomsCount--;
+roomsCountEl.textContent = roomsCount;
+updateGuestsButton();
+}
+});
+});
+</script>
+</body>
+</html>

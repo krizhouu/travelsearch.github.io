@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Search Results - Wanderlust</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#57B5E7',secondary:'#8DD3C7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-gray-50">
+<nav class="sticky top-0 z-50 bg-white shadow-sm">
+<div class="w-full px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-8">
+<a href="index.html" data-readdy="true" class="text-2xl font-['Pacifico'] text-primary">Wanderlust</a>
+<div class="hidden md:flex space-x-6">
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Destinations</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Hotels</a>
+<a href="#" class="text-primary font-semibold">Flights</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Tours</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">Deals</a>
+<a href="#" class="text-gray-700 hover:text-primary transition-colors">My Bookings</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 text-sm text-gray-600">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-global-line"></i>
+</div>
+<span>EN / USD</span>
+</div>
+<button class="text-gray-700 hover:text-primary transition-colors whitespace-nowrap">Sign In</button>
+<button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Register</button>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="bg-white border-b border-gray-200">
+<div class="max-w-7xl mx-auto px-6 py-6">
+<div class="flex items-center space-x-4 mb-6">
+<a href="index.html" data-readdy="true" class="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-left-line"></i>
+</div>
+<span>Back to Home</span>
+</a>
+<div class="text-gray-400">/</div>
+<span class="text-gray-900 font-medium">Flight Search Results</span>
+</div>
+
+<div class="bg-gray-50 rounded-xl p-6">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<div class="relative">
+<label class="block text-sm font-medium text-gray-700 mb-2">From</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+<i class="ri-takeoff-line text-gray-400"></i>
+</div>
+<input type="text" value="New York (JFK)" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div class="relative">
+<label class="block text-sm font-medium text-gray-700 mb-2">To</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+<i class="ri-plane-landing-line text-gray-400"></i>
+</div>
+<input type="text" value="London (LHR)" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Departure</label>
+<input type="date" value="2025-02-15" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Return</label>
+<input type="date" value="2025-02-22" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
+<div class="relative">
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+<button class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left focus:ring-2 focus:ring-primary focus:border-transparent text-sm">2 Adults, Economy</button>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Update Search</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="max-w-7xl mx-auto px-6 py-6">
+<div class="mb-6">
+<h1 class="text-2xl font-bold text-gray-900 mb-2">Flight Search Results</h1>
+<p class="text-gray-600">Found 247 flights from New York (JFK) to London (LHR) • Feb 15 - Feb 22, 2025</p>
+</div>
+
+<div class="flex gap-8">
+<div class="w-80 flex-shrink-0">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-24">
+<h3 class="text-lg font-semibold text-gray-900 mb-4">Filter Results</h3>
+
+<div class="space-y-6">
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Price Range</h4>
+<div class="space-y-2">
+<div class="flex justify-between text-sm text-gray-600">
+<span>$299</span>
+<span>$1,299</span>
+</div>
+<div class="relative">
+<input type="range" min="299" max="1299" value="800" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
+</div>
+<div class="text-center text-sm text-gray-600">Up to $800</div>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Departure Time</h4>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">Early Morning (6:00 - 12:00)</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+<span class="ml-2 text-sm text-gray-700">Afternoon (12:00 - 18:00)</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">Evening (18:00 - 24:00)</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Stops</h4>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+<span class="ml-2 text-sm text-gray-700">Non-stop</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">1 Stop</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">2+ Stops</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Airlines</h4>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+<span class="ml-2 text-sm text-gray-700">British Airways</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+<span class="ml-2 text-sm text-gray-700">Virgin Atlantic</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">American Airlines</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">Delta Airlines</span>
+</label>
+</div>
+</div>
+
+<div>
+<h4 class="font-medium text-gray-900 mb-3">Flight Duration</h4>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">Under 8 hours</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2" checked>
+<span class="ml-2 text-sm text-gray-700">8-12 hours</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2">
+<span class="ml-2 text-sm text-gray-700">12+ hours</span>
+</label>
+</div>
+</div>
+</div>
+
+<button class="w-full mt-6 bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Apply Filters</button>
+</div>
+</div>
+
+<div class="flex-1">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<span class="text-sm text-gray-600">Sort by:</span>
+<div class="relative">
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+<select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:ring-2 focus:ring-primary focus:border-transparent">
+<option>Price (Lowest First)</option>
+<option>Duration (Shortest First)</option>
+<option>Departure Time (Earliest First)</option>
+<option>Arrival Time (Earliest First)</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<button class="flex items-center space-x-2 px-3 py-2 bg-primary text-white !rounded-button text-sm whitespace-nowrap">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-list-unordered"></i>
+</div>
+<span>List</span>
+</button>
+<button class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 !rounded-button text-sm whitespace-nowrap">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-grid-line"></i>
+</div>
+<span>Grid</span>
+</button>
+</div>
+</div>
+</div>
+
+<div class="space-y-4">
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-8 bg-cover bg-center rounded" style="background-image: url('https://readdy.ai/api/search-image?query=British%20Airways%20airline%20logo%20with%20elegant%20blue%20and%20red%20design%20on%20clean%20white%20background.%20Professional%20aviation%20branding%20with%20modern%20typography%20and%20sophisticated%20color%20scheme.%20High-quality%20corporate%20logo%20design%20for%20premium%20airline%20company&width=100&height=60&seq=ba_logo&orientation=landscape')"></div>
+<div>
+<div class="font-semibold text-gray-900">British Airways</div>
+<div class="text-sm text-gray-500">BA 183</div>
+</div>
+</div>
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">14:30</div>
+<div class="text-sm text-gray-500">JFK</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="text-sm text-gray-500">7h 25m</div>
+<div class="flex-1 h-px bg-gray-300 relative">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="text-sm text-gray-500">Non-stop</div>
+</div>
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">21:55</div>
+<div class="text-sm text-gray-500">LHR</div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$649</div>
+<div class="text-sm text-gray-500">per person</div>
+<button class="mt-3 bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Select Flight</button>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between text-sm text-gray-600">
+<div class="flex items-center space-x-4">
+<span>Economy Class</span>
+<span>•</span>
+<span>Boeing 777-300ER</span>
+<span>•</span>
+<span>1 checked bag included</span>
+</div>
+<button class="text-primary hover:underline">View Details</button>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-8 bg-cover bg-center rounded" style="background-image: url('https://readdy.ai/api/search-image?query=Virgin%20Atlantic%20airline%20logo%20with%20distinctive%20red%20and%20white%20branding%20on%20clean%20white%20background.%20Modern%20aviation%20company%20logo%20with%20elegant%20typography%20and%20premium%20design%20elements.%20Professional%20airline%20branding%20for%20luxury%20travel%20services&width=100&height=60&seq=virgin_logo&orientation=landscape')"></div>
+<div>
+<div class="font-semibold text-gray-900">Virgin Atlantic</div>
+<div class="text-sm text-gray-500">VS 45</div>
+</div>
+</div>
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">16:15</div>
+<div class="text-sm text-gray-500">JFK</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="text-sm text-gray-500">7h 40m</div>
+<div class="flex-1 h-px bg-gray-300 relative">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="text-sm text-gray-500">Non-stop</div>
+</div>
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">23:55</div>
+<div class="text-sm text-gray-500">LHR</div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$689</div>
+<div class="text-sm text-gray-500">per person</div>
+<button class="mt-3 bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Select Flight</button>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between text-sm text-gray-600">
+<div class="flex items-center space-x-4">
+<span>Economy Class</span>
+<span>•</span>
+<span>Airbus A350-1000</span>
+<span>•</span>
+<span>1 checked bag included</span>
+</div>
+<button class="text-primary hover:underline">View Details</button>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-8 bg-cover bg-center rounded" style="background-image: url('https://readdy.ai/api/search-image?query=American%20Airlines%20logo%20with%20iconic%20eagle%20symbol%20and%20red%20white%20blue%20color%20scheme%20on%20clean%20white%20background.%20Classic%20US%20airline%20branding%20with%20patriotic%20design%20elements%20and%20professional%20typography.%20Premium%20aviation%20company%20logo%20design&width=100&height=60&seq=aa_logo&orientation=landscape')"></div>
+<div>
+<div class="font-semibold text-gray-900">American Airlines</div>
+<div class="text-sm text-gray-500">AA 106</div>
+</div>
+</div>
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">18:45</div>
+<div class="text-sm text-gray-500">JFK</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="text-sm text-gray-500">9h 15m</div>
+<div class="flex-1 h-px bg-gray-300 relative">
+<div class="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
+<div class="absolute top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="text-sm text-gray-500">1 Stop</div>
+</div>
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">04:00+1</div>
+<div class="text-sm text-gray-500">LHR</div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$579</div>
+<div class="text-sm text-gray-500">per person</div>
+<button class="mt-3 bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Select Flight</button>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between text-sm text-gray-600">
+<div class="flex items-center space-x-4">
+<span>Economy Class</span>
+<span>•</span>
+<span>Boeing 787-9</span>
+<span>•</span>
+<span>Stop in Philadelphia (1h 25m)</span>
+</div>
+<button class="text-primary hover:underline">View Details</button>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-8 bg-cover bg-center rounded" style="background-image: url('https://readdy.ai/api/search-image?query=Delta%20Airlines%20logo%20with%20triangular%20symbol%20and%20blue%20red%20color%20scheme%20on%20clean%20white%20background.%20Professional%20US%20airline%20branding%20with%20modern%20design%20elements%20and%20elegant%20typography.%20Premium%20aviation%20company%20logo%20for%20commercial%20flights&width=100&height=60&seq=delta_logo&orientation=landscape')"></div>
+<div>
+<div class="font-semibold text-gray-900">Delta Airlines</div>
+<div class="text-sm text-gray-500">DL 4</div>
+</div>
+</div>
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">20:30</div>
+<div class="text-sm text-gray-500">JFK</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="text-sm text-gray-500">7h 50m</div>
+<div class="flex-1 h-px bg-gray-300 relative">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="text-sm text-gray-500">Non-stop</div>
+</div>
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">04:20+1</div>
+<div class="text-sm text-gray-500">LHR</div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$719</div>
+<div class="text-sm text-gray-500">per person</div>
+<button class="mt-3 bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Select Flight</button>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between text-sm text-gray-600">
+<div class="flex items-center space-x-4">
+<span>Economy Class</span>
+<span>•</span>
+<span>Airbus A330-900neo</span>
+<span>•</span>
+<span>1 checked bag included</span>
+</div>
+<button class="text-primary hover:underline">View Details</button>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-8 bg-cover bg-center rounded" style="background-image: url('https://readdy.ai/api/search-image?query=Lufthansa%20airline%20logo%20with%20distinctive%20crane%20bird%20symbol%20and%20blue%20yellow%20color%20scheme%20on%20clean%20white%20background.%20German%20aviation%20company%20branding%20with%20elegant%20design%20and%20professional%20typography.%20Premium%20European%20airline%20logo&width=100&height=60&seq=lufthansa_logo&orientation=landscape')"></div>
+<div>
+<div class="font-semibold text-gray-900">Lufthansa</div>
+<div class="text-sm text-gray-500">LH 404</div>
+</div>
+</div>
+<div class="flex items-center space-x-8">
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">22:15</div>
+<div class="text-sm text-gray-500">JFK</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="text-sm text-gray-500">10h 45m</div>
+<div class="flex-1 h-px bg-gray-300 relative">
+<div class="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-400 rounded-full"></div>
+<div class="absolute top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="text-sm text-gray-500">1 Stop</div>
+</div>
+<div class="text-center">
+<div class="text-xl font-bold text-gray-900">09:00+1</div>
+<div class="text-sm text-gray-500">LHR</div>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$599</div>
+<div class="text-sm text-gray-500">per person</div>
+<button class="mt-3 bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Select Flight</button>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between text-sm text-gray-600">
+<div class="flex items-center space-x-4">
+<span>Economy Class</span>
+<span>•</span>
+<span>Boeing 747-8</span>
+<span>•</span>
+<span>Stop in Frankfurt (2h 15m)</span>
+</div>
+<button class="text-primary hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="flex items-center justify-center space-x-2 mt-8">
+<button class="px-3 py-2 text-gray-400 hover:text-gray-600">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-left-s-line"></i>
+</div>
+</button>
+<button class="px-3 py-2 bg-primary text-white !rounded-button">1</button>
+<button class="px-3 py-2 text-gray-600 hover:text-gray-900">2</button>
+<button class="px-3 py-2 text-gray-600 hover:text-gray-900">3</button>
+<button class="px-3 py-2 text-gray-600 hover:text-gray-900">4</button>
+<span class="px-3 py-2 text-gray-400">...</span>
+<button class="px-3 py-2 text-gray-600 hover:text-gray-900">25</button>
+<button class="px-3 py-2 text-gray-600 hover:text-gray-900">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-right-s-line"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="comparison-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4 hidden">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<span class="font-medium text-gray-900">Compare Selected Flights</span>
+<div class="flex space-x-2" id="selected-flights">
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button id="clear-comparison" class="text-gray-600 hover:text-gray-900">Clear All</button>
+<button id="compare-flights" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors font-medium whitespace-nowrap">Compare Flights</button>
+</div>
+</div>
+</div>
+
+<footer class="bg-gray-900 text-white py-12 mt-16">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<h3 class="text-2xl font-['Pacifico'] text-primary mb-4">Wanderlust</h3>
+<p class="text-gray-300 mb-4">Your trusted partner for unforgettable travel experiences around the world.</p>
+<div class="flex space-x-4">
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-facebook-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-twitter-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-instagram-fill"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors cursor-pointer">
+<i class="ri-youtube-fill"></i>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Company</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Support</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Booking Support</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Travel Insurance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Popular Destinations</h4>
+<ul class="space-y-2 text-gray-300">
+<li><a href="#" class="hover:text-white transition-colors">Paris, France</a></li>
+<li><a href="#" class="hover:text-white transition-colors">Tokyo, Japan</a></li>
+<li><a href="#" class="hover:text-white transition-colors">New York, USA</a></li>
+<li><a href="#" class="hover:text-white transition-colors">London, UK</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm">© 2025 Wanderlust. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+</div>
+<div class="flex items-center space-x-4 mt-4 md:mt-0">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-visa-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-mastercard-fill text-2xl text-gray-400"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill text-2xl text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script id="flight-selection">
+document.addEventListener('DOMContentLoaded', function() {
+const selectButtons = document.querySelectorAll('button[class*="bg-primary"][class*="Select Flight"]');
+const comparisonBar = document.getElementById('comparison-bar');
+const selectedFlightsContainer = document.getElementById('selected-flights');
+const clearButton = document.getElementById('clear-comparison');
+const compareButton = document.getElementById('compare-flights');
+let selectedFlights = [];
+
+selectButtons.forEach((button, index) => {
+button.addEventListener('click', function() {
+const flightCard = button.closest('.bg-white');
+const airline = flightCard.querySelector('.font-semibold').textContent;
+const price = flightCard.querySelector('.text-2xl').textContent;
+const flightNumber = flightCard.querySelector('.text-sm.text-gray-500').textContent;
+
+if (selectedFlights.length < 3 && !selectedFlights.some(f => f.flightNumber === flightNumber)) {
+selectedFlights.push({ airline, price, flightNumber });
+updateComparisonBar();
+
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = `${airline} ${flightNumber} added to comparison`;
+document.body.appendChild(notification);
+setTimeout(() => notification.remove(), 3000);
+} else if (selectedFlights.length >= 3) {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Maximum 3 flights can be compared';
+document.body.appendChild(notification);
+setTimeout(() => notification.remove(), 3000);
+}
+});
+});
+
+function updateComparisonBar() {
+if (selectedFlights.length > 0) {
+comparisonBar.classList.remove('hidden');
+selectedFlightsContainer.innerHTML = selectedFlights.map(flight => 
+`<div class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">
+${flight.airline} ${flight.flightNumber} - ${flight.price}
+</div>`
+).join('');
+} else {
+comparisonBar.classList.add('hidden');
+}
+}
+
+clearButton.addEventListener('click', function() {
+selectedFlights = [];
+updateComparisonBar();
+});
+
+compareButton.addEventListener('click', function() {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Opening flight comparison view...';
+document.body.appendChild(notification);
+setTimeout(() => notification.remove(), 3000);
+});
+});
+</script>
+
+<script id="filter-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const priceRange = document.querySelector('input[type="range"]');
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const applyFiltersButton = document.querySelector('button[class*="Apply Filters"]');
+
+priceRange.addEventListener('input', function() {
+const value = this.value;
+const display = this.parentElement.nextElementSibling;
+display.textContent = `Up to $${value}`;
+});
+
+applyFiltersButton.addEventListener('click', function() {
+const notification = document.createElement('div');
+notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+notification.textContent = 'Filters applied successfully!';
+document.body.appendChild(notification);
+setTimeout(() => notification.remove(), 3000);
+});
+});
+</script>
+
+<script id="view-details">
+document.addEventListener('DOMContentLoaded', function() {
+const viewDetailsButtons = document.querySelectorAll('button[class*="text-primary"][class*="View Details"]');
+
+viewDetailsButtons.forEach(button => {
+button.addEventListener('click', function() {
+const flightCard = button.closest('.bg-white');
+const airline = flightCard.querySelector('.font-semibold').textContent;
+
+const modal = document.createElement('div');
+modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+modal.innerHTML = `
+<div class="bg-white rounded-xl p-8 max-w-2xl w-full mx-4">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold text-gray-900">${airline} Flight Details</h3>
+<button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<div class="space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<h4 class="font-semibold text-gray-900 mb-2">Departure</h4>
+<p class="text-gray-600">New York (JFK)</p>
+<p class="text-gray-600">Terminal 4</p>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-2">Arrival</h4>
+<p class="text-gray-600">London (LHR)</p>
+<p class="text-gray-600">Terminal 3</p>
+</div>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-2">Baggage Allowance</h4>
+<p class="text-gray-600">1 checked bag (23kg), 1 carry-on (8kg), 1 personal item</p>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-2">Fare Conditions</h4>
+<p class="text-gray-600">Refundable with fee, Changes allowed with fee</p>
+</div>
+</div>
+<div class="mt-6 flex justify-end space-x-4">
+<button class="px-6 py-2 border border-gray-300 text-gray-700 !rounded-button hover:bg-gray-50">Close</button>
+<button class="px-6 py-2 bg-primary text-white !rounded-button hover:bg-opacity-90">Book This Flight</button>
+</div>
+</div>
+`;
+
+document.body.appendChild(modal);
+
+const closeButtons = modal.querySelectorAll('button');
+closeButtons.forEach(btn => {
+btn.addEventListener('click', () => modal.remove());
+});
+});
+});
+});
+</script>
+
+</body>
+</html>
